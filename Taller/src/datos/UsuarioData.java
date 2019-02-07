@@ -13,7 +13,12 @@ public class UsuarioData {
 	}
 	
 	public boolean validarUsuario(Usuario usuario) {
-		return false;
+		if (usuario.getUsername().equals("bruno") && usuario.getPassword().equals("1234")) {
+			return true;
+		}
+		else  {
+			return false;
+		}
 	}
 
 }
