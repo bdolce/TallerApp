@@ -33,7 +33,7 @@
 		        <a class="nav-link" href="Clientes"><span class="fas fa-user-alt"></span> Clientes</a>
 		      </li>
 			      <li class="nav-item">
-		        <a class="nav-link" href="#"><span class="far fa-file-alt"></span> Ordenes de Reparación</a>
+		        <a class="nav-link" href="Ordenes"><span class="far fa-file-alt"></span> Ordenes de Reparación</a>
 		      </li>
 		      <li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

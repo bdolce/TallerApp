@@ -16,7 +16,7 @@
           <div class="table-title">
               <div class="row">
                   <div class="col-sm-6">
-          <h2>Gestión <b>Clientes</b></h2>
+          <h2>Gestión <b>Ordenes de Reparacion</b></h2>
         </div>
         <div class="col-sm-6">
           <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Cliente</span></a>
@@ -26,27 +26,32 @@
           </div>
           <table class="table table-striped table-hover">
               <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Direccion</th>
-                  <th>Telefono</th>
-                  <th>Email</th>
-                </tr>
+                  <tr>
+                    <th>ID</th>
+                    <th>Articulo</th>
+                    <th>Fecha Ingreso</th>
+                    <th>Fecha Retiro</th>
+                    <th>Estado</th>
+                    <th>Accesorios</th>
+                    <th>Prioridad</th>
+                    <th>Cliente</th>
+                  </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>01</td>
-                  <td>Thomas Hardy</td>
-                  <td>thomashardy@mail.com</td>
-                  <td>89 Chiaroscuro Rd, Portland, USA</td>
-                  <td>(171) 555-2222</td>
-                  <td>
-                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                  </td>
-                </tr>
+                  <tr>
+                      <td>01</td>
+                      <td>LCD LG</td>
+                      <td>2019-01-01</td>
+                      <td>2019-01-11</td>
+                      <td>Reparado</td>
+                      <td>Pie, soporte, CR</td>
+                      <td>5</td>
+                      <td>Bruno Dolce</td>
+                      <td>
+                          <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                          <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                      </td>
+                  </tr>
               </tbody>
           </table>
           </div>
@@ -125,27 +130,6 @@
             <div class="modal-footer">
               <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
               <input type="submit" class="btn btn-info" value="Save">
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Delete Modal HTML -->
-    <div id="deleteEmployeeModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <form>
-            <div class="modal-header">            
-              <h4 class="modal-title">Eliminar Cliente</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">          
-              <p>¿Está seguro que desea eliminar el cliente?</p>
-              <p class="text-warning"><small>Esta acción no puede deshacerse.</small></p>
-            </div>
-            <div class="modal-footer">
-              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              <input type="submit" class="btn btn-danger" value="Delete">
             </div>
           </form>
         </div>
