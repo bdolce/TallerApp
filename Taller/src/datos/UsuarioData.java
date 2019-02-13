@@ -3,10 +3,6 @@ package datos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-
-import datos.PasswordStorage.CannotPerformOperationException;
-import datos.PasswordStorage.InvalidHashException;
 import entidades.Usuario;
 
 public class UsuarioData {
@@ -58,12 +54,11 @@ public class UsuarioData {
 			st.setString(1, usuario.getUsername());
 			st.setString(2, hashedPassword);
 			st.setString(3, usuario.getEmail());
-			rs = st.executeQuery();
+			st.execute();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			rs.close();
 			st.close();
 			ConnectionFactory.getInstancia().releaseConn();
 		}
@@ -72,7 +67,7 @@ public class UsuarioData {
 	public boolean validarUsuario(Usuario usuario) throws Exception {
 		Usuario u = getOne(usuario);
 		if (usuario.getUsername().equals(u.getUsername()) &&
-				PasswordStorage.verifyPassword(u.getPassword(), usuario.getPassword())) {
+				PasswordStorage.verifyPassword(usuario.getPassword(), u.getPassword())) {
 			return true;
 		}
 		else {
