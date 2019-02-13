@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:layout>
   <jsp:attribute name="head"> <!-- Referencias extra que se añaden a las de la base (OJO SI EL COMENTARIO ESTA EN LA LINEA ANTERIOR SE ROMPE) -->
@@ -36,17 +37,20 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>01</td>
-                  <td>Thomas Hardy</td>
-                  <td>thomashardy@mail.com</td>
-                  <td>89 Chiaroscuro Rd, Portland, USA</td>
-                  <td>(171) 555-2222</td>
-                  <td>
-                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                  </td>
-                </tr>
+                <c:forEach var="c" items="${clientes}" >
+                  <tr>
+                    <td>${c.getId()}</td>
+                    <td>${c.getNombre()}</td>
+                    <td>${c.getApellido()}</td>
+                    <td>${c.getDireccion()}</td>
+                    <td>${c.getTelefono()}</td>
+                    <td>${c.getEmail()}</td>
+                    <td>
+                      <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                      <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                    </td>
+                  </tr>
+                </c:forEach>
               </tbody>
           </table>
           </div>
