@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,10 +45,14 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		Usuario usuario = new Usuario(username,password);
-		if (ul.validarUsuario(usuario)) {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Clientes.jsp");
-			rd.forward(request, response);
+		try {
+			if (ul.validarUsuario(usuario)) {
+				RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Clientes.jsp");
+				rd.forward(request, response);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
-
 }

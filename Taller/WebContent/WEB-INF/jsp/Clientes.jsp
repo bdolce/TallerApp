@@ -57,6 +57,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <form>
+            <input type="hidden" name="action" value="alta" />
             <div class="modal-header">            
               <h4 class="modal-title">Añadir Cliente</h4>
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
