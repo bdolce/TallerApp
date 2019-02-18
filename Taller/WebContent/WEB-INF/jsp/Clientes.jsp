@@ -20,8 +20,7 @@
           <h2>Gestión <b>Clientes</b></h2>
         </div>
         <div class="col-sm-6">
-          <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Cliente</span></a>
-          <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar</span></a>            
+          <a href="#nuevoCliente" id ="btnNew" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Cliente</span></a>
         </div>
               </div>
           </div>
@@ -46,8 +45,7 @@
                     <td>${c.getTelefono()}</td>
                     <td>${c.getEmail()}</td>
                     <td>
-                      <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                      <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                      <a href="#editarCliente" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                     </td>
                   </tr>
                 </c:forEach>
@@ -57,104 +55,110 @@
       </div>
       
     <!-- Modales HTML -->
-    <div id="addEmployeeModal" class="modal fade">
+    <div id="nuevoCliente" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form>
-            <input type="hidden" name="action" value="alta" />
+          <form id="formNuevo" method="post" action="Clientes">
             <div class="modal-header">            
               <h4 class="modal-title">Añadir Cliente</h4>
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
-            <div class="modal-body">          
+            <div class="modal-body">   
+              <input type="hidden" name="accion" value="alta" />       
               <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" required>
+                <label>Nombre</label>
+                <input type="text" id="modal-nombre" class="form-control" name="cli-nombre" required>
               </div>
+              <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" id="modal-apellido" class="form-control" name="cli-apellido" required>
+              </div>
+              <div class="form-group">
+                <label>Direccion</label>
+                <input type="text" id="modal-direccion" class="form-control" name="cli-direccion" required>
+              </div>
+              <div class="form-group">
+                <label>Telefono</label>
+                <input type="number" id="modal-telefono" class="form-control" name="cli-telefono" maxlength="20" required>
+              </div>  
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label>Address</label>
-                <textarea class="form-control" required></textarea>
-              </div>
-              <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" required>
-              </div>          
+                <input type="email" id="modal-email" class="form-control" name="cli-email">
+              </div>        
             </div>
             <div class="modal-footer">
-              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              <input type="submit" class="btn btn-success" value="Add">
+              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+              <input type="submit" class="btn btn-success" value="Agregar">
             </div>
           </form>
         </div>
       </div>
     </div>
     <!-- Edit Modal HTML -->
-    <div id="editEmployeeModal" class="modal fade">
+    <div id="editarCliente" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form>
+          <form id="formEditar" method="post" action="Clientes">
             <div class="modal-header">            
               <h4 class="modal-title">Editar Cliente</h4>
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">  
+              <input type="hidden" name="accion" value="editar">
               <div class="form-group">
                 <label>ID</label>
-                <input type="text" class="form-control" required>
+                <input type="text" id="modal-id" class="form-control" name="cli-id" readonly required>
               </div>        
               <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" class="form-control" required>
+                <input type="text" id="modal-nombre" class="form-control" name="cli-nombre" required>
               </div>
               <div class="form-group">
                 <label>Apellido</label>
-                <input type="email" class="form-control" required>
+                <input type="text" id="modal-apellido" class="form-control" name="cli-apellido" required>
               </div>
               <div class="form-group">
                 <label>Direccion</label>
-                <textarea class="form-control" required></textarea>
+                <input type="text" id="modal-direccion" class="form-control" name="cli-direccion" required>
               </div>
               <div class="form-group">
                 <label>Telefono</label>
-                <input type="text" class="form-control" required>
+                <input type="number" id="modal-telefono" class="form-control" name="cli-telefono" maxlength="20" required>
               </div>  
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" class="form-control">
+                <input type="email" id="modal-email" class="form-control" name="cli-email">
               </div>        
             </div>
             <div class="modal-footer">
               <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              <input type="submit" class="btn btn-info" value="Save">
+              <input type="submit" class="btn btn-info" value="Guardar">
             </div>
           </form>
         </div>
       </div>
     </div>
-    <!-- Delete Modal HTML -->
-    <div id="deleteEmployeeModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <form>
-            <div class="modal-header">            
-              <h4 class="modal-title">Eliminar Cliente</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">          
-              <p>¿Está seguro que desea eliminar el cliente?</p>
-              <p class="text-warning"><small>Esta acción no puede deshacerse.</small></p>
-            </div>
-            <div class="modal-footer">
-              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              <input type="submit" class="btn btn-danger" value="Delete">
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    
+    <script>
+      $(".edit").click(function() {
+          var $row = $(this).closest("tr")   // Finds the closest row <tr> 
+          //Find the <td> children elements
+          var td_id = $row.find("td:nth-child(1)").text()
+          var td_nombre = $row.find("td:nth-child(2)").text()
+          var td_apellido = $row.find("td:nth-child(3)").text()
+          var td_direccion = $row.find("td:nth-child(4)").text()
+          var td_telefono = $row.find("td:nth-child(5)").text()
+          var td_email = $row.find("td:nth-child(6)").text()
+          
+          //Set modal control values
+          $("#formEditar #modal-id").val(td_id);
+          $("#formEditar #modal-nombre").val(td_nombre);
+          $("#formEditar #modal-apellido").val(td_apellido);
+          $("#formEditar #modal-direccion").val(td_direccion);
+          $("#formEditar #modal-telefono").val(td_telefono);
+          $("#formEditar #modal-email").val(td_email);
+      });
+      
+    </script>
   </jsp:body>
 </t:layout>

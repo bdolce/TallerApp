@@ -21,7 +21,7 @@
       <h1 class="h3 mb-3 font-weight-normal">Inicio de Sesión</h1>
       <input type="hidden" name="accion" value="login">
       <label for="inputUsername" class="sr-only">Usuario</label>
-      <input type="text" id="inputUsername" class="form-control" placeholder="Nombre de Usuario" name=username required autofocus>
+      <input type="text" id="inputUsername" class="form-control" placeholder="Nombre de Usuario" name="username" required autofocus>
       <label for="inputPassword" class="sr-only">Contraseña</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" name="password" required>
       <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar">

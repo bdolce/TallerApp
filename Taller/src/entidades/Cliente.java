@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Cliente implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6208379818286784486L;
 	private int id;
 	private String apellido;
 	private String nombre;
@@ -20,6 +24,15 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 	
+	public Cliente(String apellido, String nombre, String direccion, String telefono, String email) {
+		super();
+		this.apellido = apellido;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.email = email;
+	}
+
 	public Cliente() {
 		this.apellido = null;
 		this.nombre = null;

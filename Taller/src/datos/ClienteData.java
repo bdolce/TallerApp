@@ -84,13 +84,53 @@ public class ClienteData {
 	
 }
 
-	public void actualizarCliente() {
-		// TODO Auto-generated method stub
+	public void actualizarCliente(Cliente cliente) throws SQLException {
+		st = null;
+		rs = null;
+		
+		try {
+			String sql = "UPDATE clientes SET apellido=?, nombre=?, direccion=?, telefono=?, email=? WHERE id=?";
+			
+			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st.setString(1, cliente.getApellido());
+			st.setString(2, cliente.getNombre());
+			st.setString(3, cliente.getDireccion());
+			st.setString(4, cliente.getTelefono());
+			st.setString(5, cliente.getEmail());
+			st.setInt(6, cliente.getId());
+			st.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			st.close();
+			ConnectionFactory.getInstancia().releaseConn();
+		}
 		
 	}
 
-	public void crearCliente() {
-		// TODO Auto-generated method stub
+	public void crearCliente(Cliente cliente) throws SQLException {
+		st = null;
+		rs = null;
+		
+		try {
+			String sql = "INSERT INTO clientes (apellido, nombre, direccion, telefono, email) VALUES (?,?,?,?,?) ";
+			
+			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st.setString(1, cliente.getApellido());
+			st.setString(2, cliente.getNombre());
+			st.setString(3, cliente.getDireccion());
+			st.setString(4, cliente.getTelefono());
+			st.setString(5, cliente.getEmail());
+			st.execute();
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			rs.close();
+			st.close();
+			ConnectionFactory.getInstancia().releaseConn();
+		}
 		
 	}
 

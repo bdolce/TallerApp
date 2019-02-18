@@ -22,12 +22,12 @@ public class ClienteLogica {
 		return cd.getAll();
 	}
 	
-	public void actualizarCliente() throws SQLException {
-		cd.actualizarCliente();
+	public void actualizarCliente(Cliente cliente) throws SQLException {
+		cd.actualizarCliente(cliente);
 	}
 	
-	public void crearCliente() throws SQLException {
-		cd.crearCliente();
+	public void crearCliente(Cliente cliente) throws SQLException {
+		cd.crearCliente(cliente);
 	}
 
 }
