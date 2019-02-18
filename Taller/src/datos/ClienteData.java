@@ -52,7 +52,7 @@ public class ClienteData {
 	public List<Cliente> getAll() throws SQLException {
 		List<Cliente> clientes = new ArrayList<>();
 		Statement st = null;
-		ResultSet rs = null;
+		rs = null;
 		
 		try {
 			String sql = "SELECT * FROM clientes";
