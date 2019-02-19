@@ -19,7 +19,7 @@ public class Falla {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getDesripcion() {
+	public String getDescripcion() {
 		return descripcion;
 	}
 	public void setDesripcion(String descripcion) {

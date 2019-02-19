@@ -41,8 +41,9 @@ public class OrdenData {
 				String accesorios = rs.getString("accesorios");
 				int prioridad = rs.getInt("prioridad");
 				
-				int id_articulo = rs.getInt("id_articulo");
-				Articulo articulo = al.getOneById(id_articulo);
+				Articulo a = new Articulo();
+				a.setId(rs.getInt("id_articulo"));
+				Articulo articulo = al.getOneById(a);
 				
 				//Creo la orden mapeada
 				o = new Orden(id, fechaIngreso, fechaRevision, fechaAviso, fechaRetiro, estado, observaciones, accesorios, prioridad, articulo);
@@ -81,8 +82,9 @@ public class OrdenData {
 				String accesorios = rs.getString("accesorios");
 				int prioridad = rs.getInt("prioridad");
 				
-				int id_articulo = rs.getInt("id_articulo");
-				Articulo articulo = al.getOneById(id_articulo);
+				Articulo a = new Articulo();
+				a.setId(rs.getInt("id_articulo"));
+				Articulo articulo = al.getOneById(a);
 				
 				//Creo la orden mapeada
 				Orden o = new Orden(id, fechaIngreso, fechaRevision, fechaAviso, fechaRetiro, estado, observaciones, accesorios, prioridad, articulo);

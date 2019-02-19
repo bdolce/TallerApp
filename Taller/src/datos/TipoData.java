@@ -7,33 +7,31 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import entidades.Marca;
+import entidades.Tipo;
 
-public class MarcaData {
-	
+public class TipoData {
 	PreparedStatement st;
 	ResultSet rs;
 	
-	public Marca getOne(Marca marca) throws SQLException {
-		Marca m = null;
+	public Tipo getOne(Tipo tipo) throws SQLException {
+		Tipo t = null;
 		st = null;
 		rs = null;
 		
 		try {
-			String sql = "SELECT * FROM marcas WHERE id=?";
+			String sql = "SELECT * FROM tipos WHERE id=?";
 			
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
-			st.setInt(1, marca.getId());
+			st.setInt(1, tipo.getId());
 			
 			if (rs.next()) {
-				//Mapeo la marca encontrada
+				//Mapeo el tipo encontrado
 				int id = rs.getInt("id");
-				String nombre = rs.getString("nombre");
+				String descripcion = rs.getString("descripcion");
 				
-				//Creo la Marca mapeada
-				m = new Marca(id, nombre);
+				//Creo el tipo mapeado
+				t = new Tipo(id, descripcion);
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -42,27 +40,27 @@ public class MarcaData {
 			ConnectionFactory.getInstancia().releaseConn();
 		}
 		
-		return m;
+		return t;
 	}
 	
-	public List<Marca> getAll() throws SQLException {
-		List<Marca> marcas = new ArrayList<>();
+	public List<Tipo> getAll() throws SQLException {
+		List<Tipo> tipos = new ArrayList<>();
 		Statement st = null;
 		rs = null;
 		
 		try {
-			String sql = "SELECT * FROM marcas";
+			String sql = "SELECT * FROM tipos";
 			st = ConnectionFactory.getInstancia().getCon().createStatement();
 			rs = st.executeQuery(sql);
 			
 			while (rs.next()) {
-				//Mapeo la marca encontrada
+				//Mapeo el tipo encontrado
 				int id = rs.getInt("id");
-				String nombre = rs.getString("nombre");
+				String descripcion = rs.getString("descripcion");
 				
-				//Creo la Marca mapeada y la agrego a la lista
-				Marca m = new Marca(id, nombre);
-				marcas.add(m);
+				//Creo el tipo mapeado y lo agrego a la lista
+				Tipo t = new Tipo(id, descripcion);
+				tipos.add(t);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,19 +70,19 @@ public class MarcaData {
 			ConnectionFactory.getInstancia().releaseConn();
 		}
 		
-		return marcas;
+		return tipos;
 	}
 	
-	public void actualizarMarca(Marca marca) throws SQLException {
+	public void actualizarTipo(Tipo tipo) throws SQLException {
 		st = null;
 		rs = null;
-				
+		
 		try {
-			String sql = "UPDATE marcas SET nombre=? WHERE id=?";
+			String sql = "UPDATE tipos SET descripcion=? WHERE id=?";
 			
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
-			st.setString(1, marca.getNombre());
-			st.setInt(2, marca.getId());
+			st.setString(1, tipo.getDescripcion());
+			st.setInt(2, tipo.getId());
 			st.execute();
 			
 		} catch (Exception e) {
@@ -95,15 +93,15 @@ public class MarcaData {
 		}
 	}
 	
-	public void crearMarca(Marca marca) throws SQLException {
+	public void crearTipo(Tipo tipo) throws SQLException {
 		st = null;
 		rs = null;
-				
+		
 		try {
-			String sql = "INSERT INTO marcas (nombre) VALUES (?)";
+			String sql = "INSERT tipos (descripcion) VALUES (?)";
 			
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
-			st.setString(1, marca.getNombre());
+			st.setString(1, tipo.getDescripcion());
 			st.execute();
 			
 		} catch (Exception e) {

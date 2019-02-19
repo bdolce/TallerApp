@@ -49,6 +49,41 @@ public class ClienteData {
 		return c;
 	}
 
+	public Cliente getOneById(Cliente cliente) throws SQLException {	
+		Cliente c = null;
+		st = null;
+		rs = null;
+		
+		try {
+			String sql = "SELECT * FROM clientes WHERE id=?";
+			
+			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st.setInt(1, cliente.getId());
+			rs = st.executeQuery();
+			
+			if (rs.next()) {	
+				//Mapeo el cliente encontrado
+				int id = rs.getInt("id");
+				String apellido = rs.getString("apellido");
+				String nombre = rs.getString("nombre");
+				String direccion = rs.getString("direccion");
+				String telefono = rs.getString("telefono");
+				String email = rs.getString("email");
+				
+				//Creo el cliente mapeado
+				c = new Cliente(id, apellido, nombre, direccion, telefono, email);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			rs.close();
+			st.close();
+			ConnectionFactory.getInstancia().releaseConn();
+		}
+		
+		return c;
+	}
+	
 	public List<Cliente> getAll() throws SQLException {
 		List<Cliente> clientes = new ArrayList<>();
 		Statement st = null;

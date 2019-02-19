@@ -7,33 +7,33 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import entidades.Marca;
+import entidades.Diagnostico;
 
-public class MarcaData {
-	
+
+
+public class DiagnosticoData {
 	PreparedStatement st;
 	ResultSet rs;
 	
-	public Marca getOne(Marca marca) throws SQLException {
-		Marca m = null;
+	public Diagnostico getOne(Diagnostico diagnostico) throws SQLException {
+		Diagnostico d = null;
 		st = null;
 		rs = null;
 		
 		try {
-			String sql = "SELECT * FROM marcas WHERE id=?";
+			String sql = "SELECT * FROM diagnosticos WHERE id=?";
 			
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
-			st.setInt(1, marca.getId());
+			st.setInt(1, diagnostico.getId());
 			
 			if (rs.next()) {
-				//Mapeo la marca encontrada
+				//Mapeo el diagnostico encontrado
 				int id = rs.getInt("id");
-				String nombre = rs.getString("nombre");
+				String descripcion = rs.getString("descripcion");
 				
-				//Creo la Marca mapeada
-				m = new Marca(id, nombre);
+				//Creo el diagnostico encontrado
+				d = new Diagnostico(id, descripcion);
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -42,28 +42,18 @@ public class MarcaData {
 			ConnectionFactory.getInstancia().releaseConn();
 		}
 		
-		return m;
+		return d;
 	}
 	
-	public List<Marca> getAll() throws SQLException {
-		List<Marca> marcas = new ArrayList<>();
+	public List<Diagnostico> getAll() throws SQLException {
+		List<Diagnostico> diagnosticos = new ArrayList<>();
 		Statement st = null;
 		rs = null;
 		
 		try {
-			String sql = "SELECT * FROM marcas";
+			String sql = "SELECT * FROM diagnosticos";
 			st = ConnectionFactory.getInstancia().getCon().createStatement();
 			rs = st.executeQuery(sql);
-			
-			while (rs.next()) {
-				//Mapeo la marca encontrada
-				int id = rs.getInt("id");
-				String nombre = rs.getString("nombre");
-				
-				//Creo la Marca mapeada y la agrego a la lista
-				Marca m = new Marca(id, nombre);
-				marcas.add(m);
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -72,19 +62,19 @@ public class MarcaData {
 			ConnectionFactory.getInstancia().releaseConn();
 		}
 		
-		return marcas;
+		return diagnosticos;
 	}
 	
-	public void actualizarMarca(Marca marca) throws SQLException {
+	public void actualizarDiagnostico(Diagnostico diagnostico) throws SQLException {
 		st = null;
 		rs = null;
-				
+		
 		try {
-			String sql = "UPDATE marcas SET nombre=? WHERE id=?";
+			String sql = "UPDATE diagnosticos SET descripcion=? WHERE id=?";
 			
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
-			st.setString(1, marca.getNombre());
-			st.setInt(2, marca.getId());
+			st.setString(1, diagnostico.getDescripcion());
+			st.setInt(2, diagnostico.getId());
 			st.execute();
 			
 		} catch (Exception e) {
@@ -95,15 +85,15 @@ public class MarcaData {
 		}
 	}
 	
-	public void crearMarca(Marca marca) throws SQLException {
+	public void crearDiagnostico(Diagnostico diagnostico) throws SQLException {
 		st = null;
 		rs = null;
-				
+		
 		try {
-			String sql = "INSERT INTO marcas (nombre) VALUES (?)";
+			String sql = "INSERT INTO diagnosticos (descripcion) VALUES (?)";
 			
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
-			st.setString(1, marca.getNombre());
+			st.setString(1, diagnostico.getDescripcion());
 			st.execute();
 			
 		} catch (Exception e) {
@@ -111,6 +101,6 @@ public class MarcaData {
 		} finally {
 			st.close();
 			ConnectionFactory.getInstancia().releaseConn();
-		}
+		}	
 	}
 }

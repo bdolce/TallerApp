@@ -32,6 +32,9 @@ public class Articulo implements Serializable {
 		this.tipo = tipo;
 	}
 
+	public Articulo() {
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -18,6 +18,10 @@ public class ClienteLogica {
 		return cd.getOneByApellido(cliente);
 	}
 	
+	public Cliente getOneById(Cliente cliente) throws SQLException {
+		return cd.getOneById(cliente);
+	}
+	
 	public List<Cliente> getAll() throws SQLException {
 		return cd.getAll();
 	}
