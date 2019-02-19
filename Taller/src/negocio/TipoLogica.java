@@ -26,7 +26,7 @@ public class TipoLogica {
 		td.actualizarTipo(tipo);
 	}
 	
-	public void creatrTipo(Tipo tipo) throws SQLException {
+	public void crearTipo(Tipo tipo) throws SQLException {
 		td.crearTipo(tipo);
 	}
 

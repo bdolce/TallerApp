@@ -18,14 +18,14 @@ import negocio.ClienteLogica;
 @WebServlet("/Clientes")
 public class ClientesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ClienteLogica cl = null;   
+	private ClienteLogica cl = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ClientesServlet() {
         super();
         // TODO Auto-generated constructor stub
-        cl = new ClienteLogica(); 
+        cl = new ClienteLogica();
     }
 
 	/**
@@ -41,30 +41,27 @@ public class ClientesServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String accion = request.getParameter("accion");
-		
+
 		if(accion.equals("alta")) {
 			altaCliente(request);
-		}
-		else if (accion.equals("editar")) {
+		}	else if (accion.equals("editar")) {
 			editarCliente(request);
 		}
-		
+
 		listarClientes(request, response);
 
 	}
 
 
 	private void altaCliente(HttpServletRequest request) {
-		//CODIGO DE ALTA DE CLIENTE...
-		//TRAER PARAMETROS DEL FORM
+		//Traer parametros del form
 		String apellido = request.getParameter("cli-apellido");
 		String nombre = request.getParameter("cli-nombre");
 		String direccion = request.getParameter("cli-direccion");
 		String telefono = request.getParameter("cli-telefono");
 		String email = request.getParameter("cli-email");
-		
-		//CREAR LA ENTIDAD CLIENTE NUEVA PARA ALTA
-		//REDIRIGIR?
+
+		//Crear la entidad nueva y darla de alta en BD
 		try {
 			Cliente cliente = new Cliente(apellido, nombre, direccion, telefono, email);
 			cl.crearCliente(cliente);
@@ -72,19 +69,18 @@ public class ClientesServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	};
-	
+
 	private void editarCliente(HttpServletRequest request) {
-		//CODIGO DE EDICION DE CLIENTE...
-		//TRAER PARAMETROS DEL FORM
+		//Traer parametros del form
 		int id = Integer.parseInt(request.getParameter("cli-id"));
 		String apellido = request.getParameter("cli-apellido");
 		String nombre = request.getParameter("cli-nombre");
 		String direccion = request.getParameter("cli-direccion");
 		String telefono = request.getParameter("cli-telefono");
 		String email = request.getParameter("cli-email");
-		
+
 		//VALIDACION?
-		//CREAR LA ENTIDAD CLIENTE Y PASARLA PARA ACTULIZACION
+		//Crear la entidad nueva y actualizarla en La BD
 		try {
 			Cliente cliente = new Cliente(id, apellido, nombre, direccion, telefono, email);
 			cl.actualizarCliente(cliente);

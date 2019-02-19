@@ -12,23 +12,24 @@ import entidades.Articulo;
 import entidades.Orden;
 
 public class OrdenData {
-	
+
 	PreparedStatement st;
 	ResultSet rs;
 	ArticuloData al;
-	
+
 	public Orden getOneById(Orden orden) throws SQLException {
 		Orden o = null;
 		st = null;
 		rs = null;
 		al = new ArticuloData();
-		
+
 		try {
 			String sql = "SELECT * FROM ordenes WHERE id=?";
-			
+
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
 			st.setInt(1, orden.getId());
-			
+			rs = st.executeQuery();
+
 			if (rs.next()) {
 				//Mapeo la orden encontrada
 				int id = rs.getInt("id");
@@ -40,14 +41,15 @@ public class OrdenData {
 				String observaciones = rs.getString("observaciones");
 				String accesorios = rs.getString("accesorios");
 				int prioridad = rs.getInt("prioridad");
-				
+
 				Articulo a = new Articulo();
 				a.setId(rs.getInt("id_articulo"));
 				Articulo articulo = al.getOneById(a);
-				
+				System.out.println("Articulo: "+ articulo.getDescripcion());
+
 				//Creo la orden mapeada
 				o = new Orden(id, fechaIngreso, fechaRevision, fechaAviso, fechaRetiro, estado, observaciones, accesorios, prioridad, articulo);
-			}			
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -55,21 +57,21 @@ public class OrdenData {
 			st.close();
 			ConnectionFactory.getInstancia().releaseConn();
 		}
-		
+
 		return o;
 	}
-	
+
 	public List<Orden> getAll() throws SQLException {
 		List<Orden> ordenes = new ArrayList<>();
 		Statement st = null;
 		rs = null;
 		al = new ArticuloData();
-		
+
 		try {
 			String sql = "SELECT * FROM ordenes";
 			st = ConnectionFactory.getInstancia().getCon().createStatement();
 			rs = st.executeQuery(sql);
-			
+
 			while (rs.next()) {
 				//Mapeo la orden encontrada
 				int id = rs.getInt("id");
@@ -81,16 +83,16 @@ public class OrdenData {
 				String observaciones = rs.getString("observaciones");
 				String accesorios = rs.getString("accesorios");
 				int prioridad = rs.getInt("prioridad");
-				
+
 				Articulo a = new Articulo();
 				a.setId(rs.getInt("id_articulo"));
 				Articulo articulo = al.getOneById(a);
-				
+
 				//Creo la orden mapeada
 				Orden o = new Orden(id, fechaIngreso, fechaRevision, fechaAviso, fechaRetiro, estado, observaciones, accesorios, prioridad, articulo);
 				ordenes.add(o);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -98,18 +100,18 @@ public class OrdenData {
 			st.close();
 			ConnectionFactory.getInstancia().releaseConn();
 		}
-		
+
 		return ordenes;
 	}
-	
+
 	public void actualizarOrden(Orden orden) throws SQLException {
 		st = null;
 		rs = null;
-		
+
 		try {
 			String sql = "UPDATE ordenes SET fecha_ingreso=?, fecha_revision=?, fecha_aviso=?, "
 					   + " fecha_retiro=?, estado=?, observaciones=?, accesorios=?, prioridad=?, articulo=? WHERE id=?";
-			
+
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
 			st.setDate(1, new java.sql.Date(orden.getFechaIngreso().getTime()));
 			st.setDate(2, new java.sql.Date(orden.getFechaRevision().getTime()));
@@ -122,7 +124,7 @@ public class OrdenData {
 			st.setInt(9, orden.getArticulo().getId());
 			st.setInt(10, orden.getId());
 			st.execute();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -131,15 +133,15 @@ public class OrdenData {
 
 		}
 	}
-	
+
 	public void crearOrden(Orden orden) throws SQLException {
 		st = null;
 		rs = null;
-		
+
 		try {
 			String sql = "INSERT INTO ordenes (fecha_ingreso, fecha_revision, fecha_aviso, fecha_retiro, estado, "
 					+ " observaciones, accesorios, prioridad, articulo) VALUES (?,?,?,?,?,?,?,?,?)";
-			
+
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
 			st.setDate(1, new java.sql.Date(orden.getFechaIngreso().getTime()));
 			st.setDate(2, new java.sql.Date(orden.getFechaRevision().getTime()));
@@ -151,7 +153,7 @@ public class OrdenData {
 			st.setInt(8, orden.getPrioridad());
 			st.setInt(9, orden.getArticulo().getId());
 			st.execute();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

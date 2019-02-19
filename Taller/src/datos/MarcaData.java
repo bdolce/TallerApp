@@ -24,6 +24,7 @@ public class MarcaData {
 			
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
 			st.setInt(1, marca.getId());
+			rs = st.executeQuery();
 			
 			if (rs.next()) {
 				//Mapeo la marca encontrada

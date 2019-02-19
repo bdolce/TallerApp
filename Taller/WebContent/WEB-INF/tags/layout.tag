@@ -32,9 +32,18 @@
 		      <li class="nav-item">
 		        <a class="nav-link" href="Clientes"><span class="fas fa-user-alt"></span> Clientes</a>
 		      </li>
-			      <li class="nav-item">
+			  <li class="nav-item">
 		        <a class="nav-link" href="Ordenes"><span class="far fa-file-alt"></span> Ordenes de Reparación</a>
 		      </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Marcas"><span class="fas fa-industry"></span> Marcas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Tipos"><span class="fas fa-align-justify"></span> Tipos</a>
+              </li>
+             <li class="nav-item">
+                <a class="nav-link" href="Diagnosticos"><span class="fas fa-briefcase-medical"></span> Diagnosticos</a>
+              </li>
 		      <li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Dropdown
@@ -45,9 +54,6 @@
 		          <div class="dropdown-divider"></div>
 		          <a class="dropdown-item" href="#">Something else here</a>
 		        </div>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link disabled" href="#">Disabled</a>
 		      </li>
 		    </ul>
 		  </div>

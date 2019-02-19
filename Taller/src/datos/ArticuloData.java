@@ -33,6 +33,8 @@ public class ArticuloData {
 			
 			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
 			st.setInt(1, articulo.getId());
+			System.out.println(articulo.getId());
+			rs = st.executeQuery();
 			
 			if (rs.next()) {
 				//Mapeo el articulo encontrado

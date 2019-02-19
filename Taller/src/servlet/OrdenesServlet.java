@@ -32,16 +32,24 @@ public class OrdenesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/jsp/Ordenes.jsp").forward(request, response);
+		listarOrdenes(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String accion = request.getParameter("accion");
+		
+		if (accion.equals("alta")) {
+			altaOrden(request);
+		} else if (accion.equals("editar")) {
+			editarOrden(request);
+		}
+		
+		listarOrdenes(request, response);
+		
 	}
 	
 	private void altaOrden(HttpServletRequest request) {
@@ -55,7 +63,7 @@ public class OrdenesServlet extends HttpServlet {
 	private void listarOrdenes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			request.setAttribute("ordenes",ol.getAll());
-			request.getRequestDispatcher("/WEB-INF/jsp/Clientes.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/Ordenes.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
