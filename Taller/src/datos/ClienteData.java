@@ -72,6 +72,8 @@ public class ClienteData {
 				
 				//Creo el cliente mapeado
 				c = new Cliente(id, apellido, nombre, direccion, telefono, email);
+			} else {
+				System.out.println("oi no hay nada wey ");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
