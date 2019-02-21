@@ -15,13 +15,13 @@ public class OrdenData {
 
 	PreparedStatement st;
 	ResultSet rs;
-	ArticuloData al;
+	ArticuloData ad;
 
 	public Orden getOneById(Orden orden) throws SQLException {
 		Orden o = null;
 		st = null;
 		rs = null;
-		al = new ArticuloData();
+		ad = new ArticuloData();
 
 		try {
 			String sql = "SELECT * FROM ordenes WHERE id=?";
@@ -44,8 +44,7 @@ public class OrdenData {
 
 				Articulo a = new Articulo();
 				a.setId(rs.getInt("id_articulo"));
-				Articulo articulo = al.getOneById(a);
-				System.out.println("Articulo: "+ articulo.getDescripcion());
+				Articulo articulo = ad.getOneById(a);
 
 				//Creo la orden mapeada
 				o = new Orden(id, fechaIngreso, fechaRevision, fechaAviso, fechaRetiro, estado, observaciones, accesorios, prioridad, articulo);
@@ -65,7 +64,7 @@ public class OrdenData {
 		List<Orden> ordenes = new ArrayList<>();
 		Statement st = null;
 		rs = null;
-		al = new ArticuloData();
+		ad = new ArticuloData();
 
 		try {
 			String sql = "SELECT * FROM ordenes";
@@ -86,7 +85,7 @@ public class OrdenData {
 
 				Articulo a = new Articulo();
 				a.setId(rs.getInt("id_articulo"));
-				Articulo articulo = al.getOneById(a);
+				Articulo articulo = ad.getOneById(a);
 
 				//Creo la orden mapeada
 				Orden o = new Orden(id, fechaIngreso, fechaRevision, fechaAviso, fechaRetiro, estado, observaciones, accesorios, prioridad, articulo);
