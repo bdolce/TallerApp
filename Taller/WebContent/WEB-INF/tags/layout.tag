@@ -1,4 +1,4 @@
-<%@tag description="Base HTML template" pageEncoding="UTF-8"%>
+<%@tag description="HTML Layout Template" pageEncoding="UTF-8"%>
 <%@attribute name='head' fragment="true" required="false" %>
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
   <body>
   	<header>
 	  <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-	    <a class="navbar-brand" href="#">TallerApp</a>
+	    <a class="navbar-brand" href="Inicio">TallerApp</a>
 	 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	   	  <span class="navbar-toggler-icon"></span>
 		  </button>
@@ -27,7 +27,7 @@
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		    <ul class="navbar-nav mr-auto">
 		      <li class="nav-item active">
-		        <a class="nav-link" href="#"><span class="fas fa-home"></span> Inicio <span class="sr-only">(current)</span></a>
+		        <a class="nav-link" href="Inicio"><span class="fas fa-home"></span> Inicio <span class="sr-only">(current)</span></a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="Clientes"><span class="fas fa-user-alt"></span> Clientes</a>
@@ -35,24 +35,18 @@
 			  <li class="nav-item">
 		        <a class="nav-link" href="Ordenes"><span class="far fa-file-alt"></span> Ordenes de Reparación</a>
 		      </li>
-              <li class="nav-item">
-                <a class="nav-link" href="Marcas"><span class="fas fa-industry"></span> Marcas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="Tipos"><span class="fas fa-align-justify"></span> Tipos</a>
-              </li>
              <li class="nav-item">
-                <a class="nav-link" href="Diagnosticos"><span class="fas fa-briefcase-medical"></span> Diagnosticos</a>
+                <a class="nav-link" href="Articulos"><span class="fas fa-box"></span> Articulos</a>
               </li>
 		      <li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          Dropdown
+		          Gestión
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="#">Action</a>
-		          <a class="dropdown-item" href="#">Another action</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="Marcas"><span class="fas fa-industry"></span> Marcas</a>
+                  <a class="dropdown-item" href="Tipos"><span class="fas fa-align-justify"></span> Tipos</a>
+                  <a class="dropdown-item" href="Diagnosticos"><span class="fas fa-briefcase-medical"></span> Diagnosticos</a>
+                  <a class="dropdown-item" href="Fallas"><span class="fas fa-heart-broken"></span> Fallas</a>
 		        </div>
 		      </li>
 		    </ul>

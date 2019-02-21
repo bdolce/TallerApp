@@ -19,7 +19,7 @@ public class UsuarioData {
 		try {
 			String sql = "SELECT * FROM usuarios WHERE username=?";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, usuario.getUsername());
 			rs = st.executeQuery();
 			
@@ -50,7 +50,7 @@ public class UsuarioData {
 			String sql = "INSERT INTO usuarios (username,password,email) VALUES (?,?,?)";
 			String hashedPassword = PasswordStorage.createHash(usuario.getPassword());
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, usuario.getUsername());
 			st.setString(2, hashedPassword);
 			st.setString(3, usuario.getEmail());

@@ -16,7 +16,7 @@
 </head>
 <body>
   <div class="form">
-    <form class="form-signin" method="post" action="LoginServlet" >
+    <form class="form-signin" method="post" action="Login" >
       <img class="mb-4" src="style/assets/images/repair-logo-png-1.png" alt="TallerApp" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Inicio de Sesión</h1>
       <input type="hidden" name="accion" value="login">

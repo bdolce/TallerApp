@@ -21,7 +21,7 @@ public class TipoData {
 		try {
 			String sql = "SELECT * FROM tipos WHERE id=?";
 
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setInt(1, tipo.getId());
 			rs = st.executeQuery();
 
@@ -51,7 +51,7 @@ public class TipoData {
 
 		try {
 			String sql = "SELECT * FROM tipos";
-			st = ConnectionFactory.getInstancia().getCon().createStatement();
+			st = ConnectionFactory.getInstancia().getConn().createStatement();
 			rs = st.executeQuery(sql);
 
 			while (rs.next()) {
@@ -81,7 +81,7 @@ public class TipoData {
 		try {
 			String sql = "UPDATE tipos SET descripcion=? WHERE id=?";
 
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, tipo.getDescripcion());
 			st.setInt(2, tipo.getId());
 			st.execute();
@@ -101,7 +101,7 @@ public class TipoData {
 		try {
 			String sql = "INSERT tipos (descripcion) VALUES (?)";
 
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, tipo.getDescripcion());
 			st.execute();
 

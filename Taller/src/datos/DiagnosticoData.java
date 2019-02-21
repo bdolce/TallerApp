@@ -22,7 +22,7 @@ public class DiagnosticoData {
 		try {
 			String sql = "SELECT * FROM diagnosticos WHERE id=?";
 
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setInt(1, diagnostico.getId());
 			rs = st.executeQuery();
 			
@@ -52,7 +52,7 @@ public class DiagnosticoData {
 
 		try {
 			String sql = "SELECT * FROM diagnosticos";
-			st = ConnectionFactory.getInstancia().getCon().createStatement();
+			st = ConnectionFactory.getInstancia().getConn().createStatement();
 			rs = st.executeQuery(sql);
 			
 			while (rs.next()) {
@@ -83,7 +83,7 @@ public class DiagnosticoData {
 		try {
 			String sql = "UPDATE diagnosticos SET descripcion=? WHERE id=?";
 
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, diagnostico.getDescripcion());
 			st.setInt(2, diagnostico.getId());
 			st.execute();
@@ -103,7 +103,7 @@ public class DiagnosticoData {
 		try {
 			String sql = "INSERT INTO diagnosticos (descripcion) VALUES (?)";
 
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, diagnostico.getDescripcion());
 			st.execute();
 

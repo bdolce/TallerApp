@@ -22,7 +22,7 @@ public class ClienteData {
 		try {
 			String sql = "SELECT * FROM clientes WHERE apellido=?";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, cliente.getApellido());
 			rs = st.executeQuery();
 			
@@ -57,7 +57,7 @@ public class ClienteData {
 		try {
 			String sql = "SELECT * FROM clientes WHERE id=?";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setInt(1, cliente.getId());
 			rs = st.executeQuery();
 			
@@ -72,8 +72,6 @@ public class ClienteData {
 				
 				//Creo el cliente mapeado
 				c = new Cliente(id, apellido, nombre, direccion, telefono, email);
-			} else {
-				System.out.println("oi no hay nada wey ");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -93,7 +91,7 @@ public class ClienteData {
 		
 		try {
 			String sql = "SELECT * FROM clientes";
-			st = ConnectionFactory.getInstancia().getCon().createStatement();
+			st = ConnectionFactory.getInstancia().getConn().createStatement();
 			rs = st.executeQuery(sql);
 
 			while (rs.next()) {
@@ -128,7 +126,7 @@ public class ClienteData {
 		try {
 			String sql = "UPDATE clientes SET apellido=?, nombre=?, direccion=?, telefono=?, email=? WHERE id=?";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, cliente.getApellido());
 			st.setString(2, cliente.getNombre());
 			st.setString(3, cliente.getDireccion());
@@ -153,7 +151,7 @@ public class ClienteData {
 		try {
 			String sql = "INSERT INTO clientes (apellido, nombre, direccion, telefono, email) VALUES (?,?,?,?,?) ";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, cliente.getApellido());
 			st.setString(2, cliente.getNombre());
 			st.setString(3, cliente.getDireccion());

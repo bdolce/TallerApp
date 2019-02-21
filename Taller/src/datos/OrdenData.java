@@ -26,7 +26,7 @@ public class OrdenData {
 		try {
 			String sql = "SELECT * FROM ordenes WHERE id=?";
 
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setInt(1, orden.getId());
 			rs = st.executeQuery();
 
@@ -68,7 +68,7 @@ public class OrdenData {
 
 		try {
 			String sql = "SELECT * FROM ordenes";
-			st = ConnectionFactory.getInstancia().getCon().createStatement();
+			st = ConnectionFactory.getInstancia().getConn().createStatement();
 			rs = st.executeQuery(sql);
 
 			while (rs.next()) {
@@ -111,7 +111,7 @@ public class OrdenData {
 			String sql = "UPDATE ordenes SET fecha_ingreso=?, fecha_revision=?, fecha_aviso=?, "
 					   + " fecha_retiro=?, estado=?, observaciones=?, accesorios=?, prioridad=?, articulo=? WHERE id=?";
 
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setDate(1, new java.sql.Date(orden.getFechaIngreso().getTime()));
 			st.setDate(2, new java.sql.Date(orden.getFechaRevision().getTime()));
 			st.setDate(3, new java.sql.Date(orden.getFechaAviso().getTime()));
@@ -138,19 +138,16 @@ public class OrdenData {
 		rs = null;
 
 		try {
-			String sql = "INSERT INTO ordenes (fecha_ingreso, fecha_revision, fecha_aviso, fecha_retiro, estado, "
-					+ " observaciones, accesorios, prioridad, articulo) VALUES (?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO ordenes (fecha_ingreso, estado, "
+					+ " observaciones, accesorios, prioridad, id_articulo) VALUES (?,?,?,?,?,?)";
 
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
-			st.setDate(1, new java.sql.Date(orden.getFechaIngreso().getTime()));
-			st.setDate(2, new java.sql.Date(orden.getFechaRevision().getTime()));
-			st.setDate(3, new java.sql.Date(orden.getFechaAviso().getTime()));
-			st.setDate(4, new java.sql.Date(orden.getFechaRetiro().getTime()));
-			st.setString(5, orden.getEstado());
-			st.setString(6, orden.getObservaciones());
-			st.setString(7, orden.getAccesorios());
-			st.setInt(8, orden.getPrioridad());
-			st.setInt(9, orden.getArticulo().getId());
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
+			st.setDate(1, new java.sql.Date(orden.getFechaIngreso().getTime()));;
+			st.setString(2, orden.getEstado());
+			st.setString(3, orden.getObservaciones());
+			st.setString(4, orden.getAccesorios());
+			st.setInt(5, orden.getPrioridad());
+			st.setInt(6, orden.getArticulo().getId());
 			st.execute();
 
 		} catch (Exception e) {

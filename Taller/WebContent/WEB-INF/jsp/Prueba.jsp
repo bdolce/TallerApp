@@ -3,49 +3,30 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout>
-  <jsp:attribute name="head"> <!-- Referencias extra que se añaden a las de la base (OJO SI EL COMENTARIO ESTA EN LA LINEA ANTERIOR SE ROMPE) -->
-    <link rel="stylesheet" href="style/css/custom/crud.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<t:base>
+  <jsp:attribute name="titulo">Marcas</jsp:attribute>
+  <jsp:attribute name="tabla">
+    <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Marca</th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach var="m" items="${marcas}" >
+            <tr>
+              <td>${m.getId()}</td>
+              <td>${m.getNombre()}</td>
+              <td>
+                <a href="#editarMarca" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+              </td>
+            </tr>
+          </c:forEach>
+        </tbody>
+    </table>
   </jsp:attribute>
-  
-  <jsp:body>
-    <!-- Contenido que se extiende en la plantilla base -->
-    <div class="container">
-      <div class="table-wrapper">
-        <div class="table-title">
-          <div class="row">
-            <div class="col-sm-6">
-              <h2>Gestión <b>Marcas</b></h2>
-            </div>
-            <div class="col-sm-6">
-              <a href="#nuevaMarca" id ="btnNew" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nueva Marca</span></a>
-            </div>
-          </div>
-        </div>
-        <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Marca</th>
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach var="m" items="${marcas}" >
-                <tr>
-                  <td>${m.getId()}</td>
-                  <td>${m.getNombre()}</td>
-                  <td>
-                    <a href="#editarMarca" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                  </td>
-                </tr>
-              </c:forEach>
-            </tbody>
-        </table>
-      </div>
-    </div>
-      
+  <jsp:attribute name="modal">
     <!-- Modales HTML -->
     <div id="nuevaMarca" class="modal fade">
       <div class="modal-dialog">
@@ -112,5 +93,5 @@
       });
       
     </script>
-  </jsp:body>
-</t:layout>
+  </jsp:attribute>
+</t:base>

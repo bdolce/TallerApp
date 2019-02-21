@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +14,7 @@ import negocio.UsuarioLogica;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UsuarioLogica ul;
@@ -32,8 +31,11 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		if (request.getSession().getAttribute("UsuarioLogeado") == null) {
+			request.getRequestDispatcher("WEB-INF/jsp/Login.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("Inicio");
+		}
 	}
 
 	/**
@@ -50,8 +52,7 @@ public class LoginServlet extends HttpServlet {
 			try {
 				if (ul.validarUsuario(usuario)) {
 					request.getSession().setAttribute("UsuarioLogeado", usuario);
-					RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Clientes.jsp");
-					rd.forward(request, response);
+					response.sendRedirect("Inicio");
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -69,8 +70,7 @@ public class LoginServlet extends HttpServlet {
 					Usuario usuario = new Usuario(username,password,email);			
 					ul.crearUsuario(usuario);
 					request.getSession().setAttribute("UsuarioLogeado", usuario);
-					RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/Clientes.jsp");
-					rd.forward(request, response);
+					response.sendRedirect("Inicio");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

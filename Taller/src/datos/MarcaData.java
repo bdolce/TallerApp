@@ -22,7 +22,7 @@ public class MarcaData {
 		try {
 			String sql = "SELECT * FROM marcas WHERE id=?";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setInt(1, marca.getId());
 			rs = st.executeQuery();
 			
@@ -53,7 +53,7 @@ public class MarcaData {
 		
 		try {
 			String sql = "SELECT * FROM marcas";
-			st = ConnectionFactory.getInstancia().getCon().createStatement();
+			st = ConnectionFactory.getInstancia().getConn().createStatement();
 			rs = st.executeQuery(sql);
 			
 			while (rs.next()) {
@@ -83,7 +83,7 @@ public class MarcaData {
 		try {
 			String sql = "UPDATE marcas SET nombre=? WHERE id=?";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, marca.getNombre());
 			st.setInt(2, marca.getId());
 			st.execute();
@@ -103,7 +103,7 @@ public class MarcaData {
 		try {
 			String sql = "INSERT INTO marcas (nombre) VALUES (?)";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, marca.getNombre());
 			st.execute();
 			

@@ -14,45 +14,45 @@
     <!-- Contenido que se extiende en la plantilla base -->
     <div class="container">
       <div class="table-wrapper">
-          <div class="table-title">
-              <div class="row">
-                  <div class="col-sm-6">
-          <h2>Gestión <b>Clientes</b></h2>
-        </div>
-        <div class="col-sm-6">
-          <a href="#nuevoCliente" id ="btnNew" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Cliente</span></a>
-        </div>
-              </div>
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h2>Gestión <b>Clientes</b></h2>
+            </div>
+            <div class="col-sm-6">
+              <a href="#nuevoCliente" id ="btnNew" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Cliente</span></a>
+            </div>
           </div>
-          <table class="table table-striped table-hover">
-              <thead>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="c" items="${clientes}" >
                 <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Direccion</th>
-                  <th>Telefono</th>
-                  <th>Email</th>
+                  <td>${c.getId()}</td>
+                  <td>${c.getNombre()}</td>
+                  <td>${c.getApellido()}</td>
+                  <td>${c.getDireccion()}</td>
+                  <td>${c.getTelefono()}</td>
+                  <td>${c.getEmail()}</td>
+                  <td>
+                    <a href="#editarCliente" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                <c:forEach var="c" items="${clientes}" >
-                  <tr>
-                    <td>${c.getId()}</td>
-                    <td>${c.getNombre()}</td>
-                    <td>${c.getApellido()}</td>
-                    <td>${c.getDireccion()}</td>
-                    <td>${c.getTelefono()}</td>
-                    <td>${c.getEmail()}</td>
-                    <td>
-                      <a href="#editarCliente" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    </td>
-                  </tr>
-                </c:forEach>
-              </tbody>
-          </table>
-          </div>
-      </div>
+              </c:forEach>
+            </tbody>
+        </table>
+        </div>
+    </div>
       
     <!-- Modales HTML -->
     <div id="nuevoCliente" class="modal fade">

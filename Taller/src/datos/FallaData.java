@@ -22,7 +22,7 @@ public class FallaData {
 		try {
 			String sql = "SELECT * FROM fallas WHERE id=?";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setInt(1, falla.getId());
 			
 			if (rs.next()) {
@@ -52,7 +52,7 @@ public class FallaData {
 		
 		try {
 			String sql = "SELECT * FROM fallas";
-			st = ConnectionFactory.getInstancia().getCon().createStatement();
+			st = ConnectionFactory.getInstancia().getConn().createStatement();
 			rs = st.executeQuery(sql);
 			
 			while (rs.next()) {
@@ -82,7 +82,7 @@ public class FallaData {
 		try {
 			String sql = "UPDATE fallas SET descripcion=? WHERE id=?";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, falla.getDescripcion());
 			st.setInt(2, falla.getId());
 			st.execute();
@@ -102,7 +102,7 @@ public class FallaData {
 		try {
 			String sql = "INSERT INTO fallas (descripcion) VALUES (?)";
 			
-			st = ConnectionFactory.getInstancia().getCon().prepareStatement(sql);
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, falla.getDescripcion());
 			st.execute();
 			

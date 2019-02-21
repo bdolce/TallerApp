@@ -14,37 +14,37 @@
     <!-- Contenido que se extiende en la plantilla base -->
     <div class="container">
       <div class="table-wrapper">
-          <div class="table-title">
-              <div class="row">
-                  <div class="col-sm-6">
-          <h2>Gestión <b>Falla</b></h2>
-        </div>
-        <div class="col-sm-6">
-          <a href="#nuevaFalla" id ="btnNew" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Falla</span></a>
-        </div>
-              </div>
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h2>Gestión <b>Fallas</b></h2>
+            </div>
+            <div class="col-sm-6">
+              <a href="#nuevaFalla" id ="btnNew" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo Falla</span></a>
+            </div>
           </div>
-          <table class="table table-striped table-hover">
-              <thead>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Descripcion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="f" items="${fallas}" >
                 <tr>
-                  <th>ID</th>
-                  <th>Descripcion</th>
+                  <td>${f.getId()}</td>
+                  <td>${f.getDescripcion()}</td>
+                  <td>
+                    <a href="#editarFalla" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                <c:forEach var="f" items="${fallas}" >
-                  <tr>
-                    <td>${f.getId()}</td>
-                    <td>${f.getDescripcion()}</td>
-                    <td>
-                      <a href="#editarFalla" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    </td>
-                  </tr>
-                </c:forEach>
-              </tbody>
-          </table>
-          </div>
+              </c:forEach>
+            </tbody>
+        </table>
       </div>
+    </div>
       
     <!-- Modales HTML -->
     <div id="nuevaFalla" class="modal fade">

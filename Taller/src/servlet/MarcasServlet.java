@@ -31,7 +31,11 @@ public class MarcasServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		listarMarcas(request, response);
+		if (request.getSession().getAttribute("UsuarioLogeado") == null) {
+			response.sendRedirect("Login");
+		} else {
+			listarMarcas(request, response);
+		}
 	}
 
 	/**

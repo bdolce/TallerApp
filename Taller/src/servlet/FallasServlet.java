@@ -30,7 +30,11 @@ public class FallasServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		listarFallas(request, response);
+		if (request.getSession().getAttribute("UsuarioLogeado") == null) {
+			response.sendRedirect("Login");
+		} else {
+			listarFallas(request, response);
+		}
 	}
 
 	/**

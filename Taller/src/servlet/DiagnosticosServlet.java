@@ -30,7 +30,11 @@ public class DiagnosticosServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		listarDiagnosticos(request, response);
+		if (request.getSession().getAttribute("UsuarioLogeado") == null) {
+			response.sendRedirect("Login");
+		} else {
+			listarDiagnosticos(request, response);
+		}
 	}
 
 	/**

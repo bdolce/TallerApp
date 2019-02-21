@@ -8,16 +8,15 @@ public class Articulo implements Serializable {
 	 */
 	private static final long serialVersionUID = -5073187171268604339L;
 	private int id;
-	private String descripcion; //cuando se usaria esto? si la desc es el tipo basicamente
+	//private String descripcion; //cuando se usaria esto? si la desc es el tipo basicamente
 	private String modelo;
 	private String serie;
 	private Cliente cliente;
 	private Marca marca;
 	private Tipo tipo;
 	
-	public Articulo(int id, String descripcion, String modelo, String serie, Cliente cliente, Marca marca, Tipo tipo) {
+	public Articulo(int id, String modelo, String serie, Cliente cliente, Marca marca, Tipo tipo) {
 		this.id = id;
-		this.descripcion = descripcion;
 		this.modelo = modelo;
 		this.serie = serie;
 		this.cliente = cliente;
@@ -25,11 +24,11 @@ public class Articulo implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public Articulo(String descripcion, Cliente cliente, Marca marca, Tipo tipo) {
-		this.descripcion = descripcion;
+	public Articulo(Cliente cliente, Marca marca, Tipo tipo, String modelo) {
 		this.cliente = cliente;
 		this.marca = marca;
 		this.tipo = tipo;
+		this.modelo = modelo;
 	}
 
 	public Articulo() {
@@ -44,11 +43,7 @@ public class Articulo implements Serializable {
 	}
 
 	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+		return tipo.getDescripcion() + " " + marca.getNombre();
 	}
 
 	public String getModelo() {

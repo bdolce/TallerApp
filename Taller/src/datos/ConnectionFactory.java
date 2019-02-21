@@ -12,7 +12,7 @@ public class ConnectionFactory {
 	private String user = "root";
 	private String password = "root";
 	private String db = "taller";
-	private String url = "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password+"&userUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private String url = "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password+"&userUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
 	
 	private static ConnectionFactory instancia;
 	
@@ -34,7 +34,7 @@ public class ConnectionFactory {
 	
 	private Connection conn;
 	private int cantConn = 0;
-	public Connection getCon() throws SQLException {
+	public Connection getConn() throws SQLException {
 		try {
 			if (conn == null || conn.isClosed()) {
 				conn = DriverManager.getConnection(url);

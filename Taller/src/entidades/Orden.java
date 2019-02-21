@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Orden implements Serializable {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2335039265025063924L;
 	private int id;
@@ -18,7 +18,7 @@ public class Orden implements Serializable {
 	private String accesorios;
 	private int prioridad;
 	private Articulo articulo;
-	
+
 	public Orden(int id, Date fechaIngreso, Date fechaRevision, Date fechaAviso, Date fechaRetiro, String estado,
 			String observaciones, String accesorios, int prioridad, Articulo articulo) {
 		super();
@@ -123,6 +123,6 @@ public class Orden implements Serializable {
 		this.articulo = articulo;
 	}
 
-	
+
 
 }

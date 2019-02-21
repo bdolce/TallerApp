@@ -32,7 +32,11 @@ public class ClientesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		listarClientes(request, response);
+		if (request.getSession().getAttribute("UsuarioLogeado") == null) {
+			response.sendRedirect("Login");
+		} else {
+			listarClientes(request, response);
+		}
 	}
 
 	/**
