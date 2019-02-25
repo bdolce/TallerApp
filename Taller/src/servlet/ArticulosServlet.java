@@ -28,7 +28,7 @@ public class ArticulosServlet extends HttpServlet {
 	private ClienteLogica cl = null;
 	private MarcaLogica ml = null;
 	private TipoLogica tl = null;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -55,7 +55,7 @@ public class ArticulosServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		String accion = request.getParameter("accion");
 		try {
 			if (accion.equals("alta")) {
@@ -63,13 +63,13 @@ public class ArticulosServlet extends HttpServlet {
 			} else if (accion.equals("editar")) {
 				editarArticulo(request);
 			}
-			
+
 			listarArticulos(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void altaArticulo(HttpServletRequest request) throws SQLException {
 		//Traer parametros del form
 		String modelo  = request.getParameter("art-modelo");
@@ -78,71 +78,66 @@ public class ArticulosServlet extends HttpServlet {
 		int id_tipo = Integer.parseInt(request.getParameter("art-tipo"));
 		int id_marca = Integer.parseInt(request.getParameter("art-marca"));
 
-		//Mapear las subentidades 
+		//Mapear las subentidades
 		Cliente c = new Cliente();
 		c.setId(id_cliente);
 		Cliente cliente = cl.getOneById(c);
-		
+
 		Tipo t = new Tipo();
 		t.setId(id_tipo);
 		Tipo tipo = tl.getOne(t);
-		
+
 		Marca m = new Marca();
 		m.setId(id_marca);
 		Marca marca = ml.getOne(m);
-		
+
 		//Crear la entidad nueva y darla de alta en la BD
 		try {
 			Articulo articulo = new Articulo(cliente, marca, tipo, modelo);
 			if (!serie.equals("")) {
 				articulo.setSerie(serie);
 			}
-			
+
 			al.crearArticulo(articulo);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	};
-	
+
 	private void editarArticulo(HttpServletRequest request) throws SQLException {
 		//Traer parametros del form
 		int id = Integer.parseInt(request.getParameter("art-id"));
 		String modelo  = request.getParameter("art-modelo");
 		String serie = request.getParameter("art-serie");
-		int id_cliente  = Integer.parseInt(request.getParameter("art-cliente"));
 		int id_tipo = Integer.parseInt(request.getParameter("art-tipo"));
 		int id_marca = Integer.parseInt(request.getParameter("art-marca"));
 
-		//Mapear las subentidades 
-		Cliente c = new Cliente();
-		c.setId(id_cliente);
-		Cliente cliente = cl.getOneById(c);
-		
+		//Mapear las subentidades 		
 		Tipo t = new Tipo();
 		t.setId(id_tipo);
 		Tipo tipo = tl.getOne(t);
-		
+
 		Marca m = new Marca();
 		m.setId(id_marca);
 		Marca marca = ml.getOne(m);
-		
+
 		//Crear la entidad nueva y editar en la BD
 		try {
-			Articulo articulo = new Articulo(id, modelo, serie, cliente, marca, tipo);
+			Articulo articulo = new Articulo(id, modelo, serie, marca, tipo);
 			al.actualizarArticulo(articulo);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	};
-	
+
 	private void listarArticulos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			request.setAttribute("articulos",al.getAll());
 			request.setAttribute("marcas",ml.getAll());
 			request.setAttribute("tipos",tl.getAll());
-			request.setAttribute("clientes",cl.getAll());  //PROVISIONAL, CAMBIAR 
+			request.setAttribute("clientes",cl.getAll());  //PROVISIONAL, CAMBIAR
 			request.getRequestDispatcher("/WEB-INF/jsp/Articulos.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

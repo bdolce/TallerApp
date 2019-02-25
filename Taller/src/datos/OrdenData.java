@@ -103,19 +103,92 @@ public class OrdenData {
 		return ordenes;
 	}
 
+	public List<Orden> getAll(String tipoBusqueda, String busqueda) throws SQLException {
+		List<Orden> ordenes = new ArrayList<>();
+		PreparedStatement st = null;
+		rs = null;
+		ad = new ArticuloData();
+		String sql = null;
+
+		try {
+			if (tipoBusqueda.equals("id")) {
+				sql = "SELECT * FROM ordenes WHERE id LIKE ?";
+			} else if (tipoBusqueda.equals("estado")) {
+				sql = "SELECT * FROM ordenes WHERE estado LIKE ?";
+			} else if (tipoBusqueda.equals("cliente")) {
+				sql = "SELECT o.id, id_articulo, fecha_ingreso, fecha_revision, fecha_aviso, observaciones, fecha_retiro, estado, accesorios, prioridad " +
+						" FROM ordenes o " +
+						" INNER JOIN articulos a ON o.id_articulo = a.id " +
+						" INNER JOIN clientes c ON a.id_cliente = c.id " +
+						" WHERE concat(c.apellido, ' ',  c.nombre) LIKE ? " +
+						" ORDER BY o.id;";
+			}
+			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
+			st.setString(1, busqueda + "%");
+			rs = st.executeQuery();
+						
+			while(rs.next()) {
+				//Mapeo la orden encontrada
+				int id = rs.getInt("id");
+				Date fechaIngreso = rs.getDate("fecha_ingreso");
+				Date fechaRevision = rs.getDate("fecha_revision");
+				Date fechaAviso = rs.getDate("fecha_aviso");
+				Date fechaRetiro = rs.getDate("fecha_retiro");
+				String estado = rs.getString("estado");
+				String observaciones = rs.getString("observaciones");
+				String accesorios = rs.getString("accesorios");
+				int prioridad = rs.getInt("prioridad");
+
+				Articulo a = new Articulo();
+				a.setId(rs.getInt("id_articulo"));
+				Articulo articulo = ad.getOneById(a);
+
+				//Creo la orden mapeada
+				Orden o = new Orden(id, fechaIngreso, fechaRevision, fechaAviso, fechaRetiro, estado, observaciones, accesorios, prioridad, articulo);
+				ordenes.add(o);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			//rs.close();
+			st.close();
+			ConnectionFactory.getInstancia().releaseConn();
+		}
+
+		return ordenes;
+	}
+
 	public void actualizarOrden(Orden orden) throws SQLException {
 		st = null;
 		rs = null;
 
 		try {
 			String sql = "UPDATE ordenes SET fecha_ingreso=?, fecha_revision=?, fecha_aviso=?, "
-					   + " fecha_retiro=?, estado=?, observaciones=?, accesorios=?, prioridad=?, articulo=? WHERE id=?";
+					   + " fecha_retiro=?, estado=?, observaciones=?, accesorios=?, prioridad=?, id_articulo=? WHERE id=?";
 
 			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setDate(1, new java.sql.Date(orden.getFechaIngreso().getTime()));
-			st.setDate(2, new java.sql.Date(orden.getFechaRevision().getTime()));
-			st.setDate(3, new java.sql.Date(orden.getFechaAviso().getTime()));
-			st.setDate(4, new java.sql.Date(orden.getFechaRetiro().getTime()));
+
+			if (orden.getFechaRevision() != null) {
+				st.setDate(2, new java.sql.Date(orden.getFechaRevision().getTime()));
+			} else {
+				st.setDate(2, null);
+			}
+
+			if (orden.getFechaAviso() != null) {
+				st.setDate(3, new java.sql.Date(orden.getFechaAviso().getTime()));
+			}
+			else {
+				st.setDate(3, null);
+			}
+
+			if (orden.getFechaRetiro() != null) {
+				st.setDate(4, new java.sql.Date(orden.getFechaRetiro().getTime()));
+			}
+			else {
+				st.setDate(4, null);
+			}
+
 			st.setString(5, orden.getEstado());
 			st.setString(6, orden.getObservaciones());
 			st.setString(7, orden.getAccesorios());

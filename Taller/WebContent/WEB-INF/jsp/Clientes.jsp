@@ -24,34 +24,36 @@
             </div>
           </div>
         </div>
-        <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach var="c" items="${clientes}" >
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+              <thead>
                 <tr>
-                  <td>${c.getId()}</td>
-                  <td>${c.getNombre()}</td>
-                  <td>${c.getApellido()}</td>
-                  <td>${c.getDireccion()}</td>
-                  <td>${c.getTelefono()}</td>
-                  <td>${c.getEmail()}</td>
-                  <td>
-                    <a href="#editarCliente" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                  </td>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Direccion</th>
+                  <th>Telefono</th>
+                  <th>Email</th>
                 </tr>
-              </c:forEach>
-            </tbody>
-        </table>
+              </thead>
+              <tbody>
+                <c:forEach var="c" items="${clientes}" >
+                  <tr>
+                    <td>${c.getId()}</td>
+                    <td>${c.getNombre()}</td>
+                    <td>${c.getApellido()}</td>
+                    <td>${c.getDireccion()}</td>
+                    <td>${c.getTelefono()}</td>
+                    <td>${c.getEmail()}</td>
+                    <td>
+                      <a href="#editarCliente" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                    </td>
+                  </tr>
+                </c:forEach>
+              </tbody>
+          </table>
         </div>
+      </div>
     </div>
       
     <!-- Modales HTML -->

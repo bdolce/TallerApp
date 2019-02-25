@@ -23,6 +23,14 @@ public class Articulo implements Serializable {
 		this.marca = marca;
 		this.tipo = tipo;
 	}
+	
+	public Articulo(int id, String modelo, String serie, Marca marca, Tipo tipo) {
+		this.id = id;
+		this.modelo = modelo;
+		this.serie = serie;
+		this.marca = marca;
+		this.tipo = tipo;
+	}
 
 	public Articulo(Cliente cliente, Marca marca, Tipo tipo, String modelo) {
 		this.cliente = cliente;

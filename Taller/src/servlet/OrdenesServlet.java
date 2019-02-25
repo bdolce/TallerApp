@@ -41,7 +41,9 @@ public class OrdenesServlet extends HttpServlet {
 		if (request.getSession().getAttribute("UsuarioLogeado") == null) {
 			response.sendRedirect("Login");
 		} else {
-			listarOrdenes(request, response);
+			String tipoBusqueda = request.getParameter("t");
+			String busqueda = request.getParameter("q");
+			listarOrdenes(request, response, tipoBusqueda, busqueda);
 		}
 	}
 
@@ -58,7 +60,7 @@ public class OrdenesServlet extends HttpServlet {
 			editarOrden(request);
 		}
 		
-		listarOrdenes(request, response);
+		listarOrdenes(request, response, null, null);
 		
 	}
 	
@@ -68,7 +70,6 @@ public class OrdenesServlet extends HttpServlet {
 			//Traer parametros del form
 			SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
 			Date fechaIngreso  = formatoFecha.parse(request.getParameter("ord-fechaIngreso"));
-			String observaciones = request.getParameter("ord-observaciones");
 			String accesorios = request.getParameter("ord-accesorios");
 			int prioridad = Integer.parseInt(request.getParameter("ord-prioridad"));
 			int id_articulo = Integer.parseInt(request.getParameter("ord-articulo"));
@@ -79,7 +80,7 @@ public class OrdenesServlet extends HttpServlet {
 			Articulo articulo = al.getOneById(a);
 			
 			//Crear la entidad nueva y darla de alta en la BD
-			Orden orden = new Orden(fechaIngreso, observaciones, accesorios, prioridad, articulo);
+			Orden orden = new Orden(fechaIngreso, accesorios, prioridad, articulo);
 			orden.setEstado("No Revisado");
 			ol.crearOrden(orden);
 			
@@ -92,13 +93,49 @@ public class OrdenesServlet extends HttpServlet {
 	
 	private void editarOrden(HttpServletRequest request) {
 		
+		try {
+			//Traer parametros del form
+			int id = Integer.parseInt(request.getParameter("ord-id"));
+			SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+			Date fechaIngreso  = formatoFecha.parse(request.getParameter("ord-fechaIngreso"));
+			Date fechaRetiro  = formatoFecha.parse(request.getParameter("ord-fechaRetiro"));
+			String estado = request.getParameter("ord-estado");
+			String accesorios = request.getParameter("ord-accesorios");
+			int prioridad = Integer.parseInt(request.getParameter("ord-prioridad"));
+			int id_articulo = Integer.parseInt(request.getParameter("ord-articulo"));
+			
+			//Mapear las subentidades 
+			Articulo a = new Articulo();
+			a.setId(id_articulo);
+			Articulo articulo = al.getOneById(a);
+			
+			//Crear la entidad nueva y darla de alta en la BD
+			Orden orden = new Orden(fechaIngreso, accesorios, prioridad, articulo);
+			orden.setId(id);
+			orden.setFechaRetiro(fechaRetiro);
+			orden.setEstado(estado);		
+			ol.actualizarOrden(orden);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	
 	};
 	
-	private void listarOrdenes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void listarOrdenes(HttpServletRequest request, HttpServletResponse response, String tipoBusqueda, String busqueda) throws ServletException, IOException {
 		try {
-			request.setAttribute("ordenes",ol.getAll());
+			if (tipoBusqueda != null || busqueda != null) {	
+				request.setAttribute("ordenes",ol.getAll(tipoBusqueda, busqueda));
+			} else {
+				request.setAttribute("ordenes",ol.getAll());
+			}
+			
 			request.setAttribute("articulos", al.getAll());
-			request.getRequestDispatcher("/WEB-INF/jsp/Ordenes.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/Ordenes.jsp").forward(request, response);	
+
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

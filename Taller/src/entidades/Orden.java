@@ -21,7 +21,6 @@ public class Orden implements Serializable {
 
 	public Orden(int id, Date fechaIngreso, Date fechaRevision, Date fechaAviso, Date fechaRetiro, String estado,
 			String observaciones, String accesorios, int prioridad, Articulo articulo) {
-		super();
 		this.id = id;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaRevision = fechaRevision;
@@ -34,13 +33,16 @@ public class Orden implements Serializable {
 		this.articulo = articulo;
 	}
 
-	public Orden(Date fechaIngreso, String observaciones, String accesorios, int prioridad, Articulo articulo) {
-		super();
+	public Orden(Date fechaIngreso, String accesorios, int prioridad, Articulo articulo) {
 		this.fechaIngreso = fechaIngreso;
-		this.observaciones = observaciones;
 		this.accesorios = accesorios;
 		this.prioridad = prioridad;
 		this.articulo = articulo;
+		this.estado = null;
+		this.fechaRevision = null;
+		this.fechaAviso = null;
+		this.fechaRetiro = null;
+		
 	}
 
 	public int getId() {

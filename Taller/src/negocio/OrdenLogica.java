@@ -21,6 +21,10 @@ public class OrdenLogica {
 		return od.getAll();
 	}
 	
+	public List<Orden> getAll(String tipoBusqueda, String busqueda) throws SQLException {
+		return od.getAll(tipoBusqueda, busqueda);
+	}
+	
 	public void actualizarOrden(Orden orden) throws SQLException {
 		od.actualizarOrden(orden);
 	}

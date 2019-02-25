@@ -166,12 +166,11 @@ public class ArticuloData {
 		rs = null;
 
 		try {
-			String sql = "UPDATE articulos SET modelo=?, serie=?, id_cliente=?, id_marca=?, id_tipo=? WHERE id=?";
+			String sql = "UPDATE articulos SET modelo=?, serie=?, id_marca=?, id_tipo=? WHERE id=?";
 
 			st = ConnectionFactory.getInstancia().getConn().prepareStatement(sql);
 			st.setString(1, articulo.getModelo());
 			st.setString(2, articulo.getSerie());
-			st.setInt(3, articulo.getCliente().getId());
 			st.setInt(4, articulo.getMarca().getId());
 			st.setInt(5, articulo.getTipo().getId());
 			st.setInt(6, articulo.getId());

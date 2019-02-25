@@ -119,16 +119,12 @@
             <div class="modal-body">  
               <div class="form-group">
                 <label>ID</label>
-                <input type="text" id="modal-id" class="form-control" name="art-id" required>
+                <input type="text" id="modal-id" class="form-control" name="art-id" readonly required>
               </div> 
               <input type="hidden" name="accion" value="editar" />
               <div class="form-group">
                 <label>Cliente</label>
-                <select class="custom-select" id="modal-cliente" name="art-cliente">
-                  <c:forEach var="c" items="${clientes}">
-                    <option value="${c.getId()}">${c}</option>
-                  </c:forEach>
-                </select> 
+                <input type="text" id="modal-cliente" class="form-control" name="art-cliente" readonly required>
               </div>     
               <div class="form-group">
                 <label>Tipo</label>
@@ -169,11 +165,11 @@
           var $row = $(this).closest("tr")   // Finds the closest row <tr> 
           //Find the <td> children elements
           var td_id = $row.find("td:nth-child(1)").text()
-          var td_cliente = $row.find("td:nth-child(2)").text()
           var td_tipo = $row.find("td:nth-child(3)").text()
           var td_marca = $row.find("td:nth-child(4)").text()
           var td_modelo = $row.find("td:nth-child(3)").text()
           var td_serie = $row.find("td:nth-child(4)").text()
+          var td_cliente = $row.find("td:nth-child(5)").text()
           
           //Set modal control values
           $("#formEditar #modal-id").val(td_id);

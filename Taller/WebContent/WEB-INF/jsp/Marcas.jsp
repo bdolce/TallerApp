@@ -24,25 +24,27 @@
             </div>
           </div>
         </div>
-        <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Marca</th>
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach var="m" items="${marcas}" >
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+              <thead>
                 <tr>
-                  <td>${m.getId()}</td>
-                  <td>${m.getNombre()}</td>
-                  <td>
-                    <a href="#editarMarca" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                  </td>
+                  <th>ID</th>
+                  <th>Marca</th>
                 </tr>
-              </c:forEach>
-            </tbody>
-        </table>
+              </thead>
+              <tbody>
+                <c:forEach var="m" items="${marcas}" >
+                  <tr>
+                    <td>${m.getId()}</td>
+                    <td>${m.getNombre()}</td>
+                    <td>
+                      <a href="#editarMarca" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                    </td>
+                  </tr>
+                </c:forEach>
+              </tbody>
+          </table>
+        </div>
       </div>
     </div>
       
