@@ -189,7 +189,7 @@
           var $row = $(this).closest("tr")   // Finds the closest row <tr> 
           //Find the <td> children elements
           var td_id = $row.find("td:nth-child(1)").text()
-          var td_articulo = $row.find("td:nth-child(2)").text()
+          var td_articulo = $row.find("td:nth-child(2)").text().substring(0,1)
           var td_fehaIngreso = $row.find("td:nth-child(3)").text()
           var td_fehaRetiro = $row.find("td:nth-child(4)").text()
           var td_estado = $row.find("td:nth-child(5)").text()

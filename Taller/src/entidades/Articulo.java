@@ -51,7 +51,7 @@ public class Articulo implements Serializable {
 	}
 
 	public String getDescripcion() {
-		return tipo.getDescripcion() + " " + marca.getNombre();
+		return this.getId() + " - " + tipo.getDescripcion() + " " + marca.getNombre();
 	}
 
 	public String getModelo() {

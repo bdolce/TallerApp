@@ -50,6 +50,16 @@
 		        </div>
 		      </li>
 		    </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Bienvenido, <%= ((entidades.Usuario)request.getSession().getAttribute("UsuarioLogeado")).getUsername() %> <i class="fas fa-user"></i>  
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                  <a class="dropdown-item" href="#">Salir</a>
+                </div>
+              </li>
+            </ul>
 		  </div>
 	  </nav>
 	</header>
